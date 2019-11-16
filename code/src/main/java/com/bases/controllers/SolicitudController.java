@@ -4,10 +4,12 @@ import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import oracle.jdbc.OracleTypes;
 
 public class SolicitudController implements Initializable {
 
@@ -75,7 +78,16 @@ public class SolicitudController implements Initializable {
 
     @FXML
     private TextField fieldCodigoProducto;
-
+    
+    @FXML
+    private TextField fieldEstadoSol;
+    
+    @FXML
+    private TextField fieldNuevoTipoSol;
+    
+    @FXML
+    private TextField fieldNuevoTipoPro;
+    
     @FXML
     private TextArea textAreaDescripcionProducto;
 
@@ -93,8 +105,14 @@ public class SolicitudController implements Initializable {
     	//solicitud
     	String codigo = "" + ((int)(Math.random()*10 + 100));
     	String estado = choiceEstadoSol.getValue();
+    	if (estado.equals("Otro")) {
+    		estado = fieldEstadoSol.getText();
+    	}
     	String descripcion = textAreaDescripcionSol.getText();
     	String tipo = choiceTipoSol.getValue();
+    	if (tipo.equals("Otro")) {
+    		tipo = fieldEstadoSol.getText();
+    	}
     	LocalDate localdate = LocalDate.now();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
     	String fechaCreacion = localdate.format(formatter);
@@ -125,6 +143,9 @@ public class SolicitudController implements Initializable {
     	if (!checkProducto.isSelected()) {
 	    	descripcionProducto = textAreaDescripcionProducto.getText();
 	    	tipoProducto = choiceTipoProducto.getValue();
+	    	if (tipoProducto.equals("Otro")) {
+	    		tipoProducto = fieldNuevoTipoPro.getText();
+	    	}
     	} else {
 	    	descripcionProducto = "0";
 	    	tipoProducto = "0";
@@ -154,15 +175,124 @@ public class SolicitudController implements Initializable {
     }
 
 	public void initialize(URL location, ResourceBundle resources) {
-		choiceEstadoSol.setItems(FXCollections.observableArrayList("Pendiente", "Asignada"));
-		choiceTipoProducto.setItems(FXCollections.observableArrayList("Telefonia", "Internet"));
-		choiceTipoSol.setItems(FXCollections.observableArrayList("Solicitud", "Daño", "Reclamo"));	
+		choiceEstadoSol.setItems(FXCollections.observableArrayList(obtenerDatosEstadoSol()));
+		choiceTipoProducto.setItems(FXCollections.observableArrayList(obtenerDatosTipoSol()));
+		choiceTipoSol.setItems(FXCollections.observableArrayList(obtenerDatosTipoProducto()));	
 	}
 	
-	public void showData() {
-		
+	private String[] obtenerDatosEstadoSol() {
+		Connection con = null;
+		CallableStatement cs = null;
+		ArrayList<String> data = new ArrayList<String>();
+		try {
+//			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
+			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
+			
+			cs = con.prepareCall("{ ? = call pkCrearSolicitudN2.pRetornarEstadoSol }");
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.execute();
+			ResultSet rs = (ResultSet) cs.getObject(1);
+			while (rs.next()) {
+				data.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				cs.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		String[] estadoSol = new String[data.size() + 1];
+		for (int i = 0; i < data.size(); i++) {
+			estadoSol[i] = data.get(i);
+		}
+		estadoSol[data.size()] = "Otro";
+		return estadoSol;
 	}
 	
+	private String[] obtenerDatosTipoSol() {
+		Connection con = null;
+		CallableStatement cs = null;
+		ArrayList<String> data = new ArrayList<String>();
+		try {
+//			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
+			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
+			
+			cs = con.prepareCall("{ ? = call pkCrearSolicitudN2.pRetornarTipoSol }");
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.execute();
+			ResultSet rs = (ResultSet) cs.getObject(1);
+			while (rs.next()) {
+				data.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				cs.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		String[] tipoSol = new String[data.size() + 1];
+		for (int i = 0; i < data.size(); i++) {
+			tipoSol[i] = data.get(i);
+		}
+		tipoSol[data.size()] = "Otro";
+		return tipoSol;
+	}
+	
+	private String[] obtenerDatosTipoProducto() {
+		Connection con = null;
+		CallableStatement cs = null;
+		ArrayList<String> data = new ArrayList<String>();
+		try {
+//			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
+			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
+			
+			cs = con.prepareCall("{ ? = call pkCrearSolicitudN2.pRetornarTipoProducto }");
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.execute();
+			ResultSet rs = (ResultSet) cs.getObject(1);
+			while (rs.next()) {
+				data.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				cs.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		String[] tipoPro = new String[data.size() + 1];
+		for (int i = 0; i < data.size(); i++) {
+			tipoPro[i] = data.get(i);
+		}
+		tipoPro[data.size()] = "Otro";
+		return tipoPro;
+	}
 	
 	public void createSolicitud(String codigo, String estado, String descripcion, String clienteCedula, String codigoProducto, String fechaCreacion, String tipo, String nombre, String fechaNacimiento, String direccion, String telefono, String descripcionProducto, String tipoProducto, int errorCodCliente, String errorNameCliente, int errorCodProducto, String errorNameProducto, int errorCodSolicitud, String errorNameSolicitud) {
 		Connection con = null;
@@ -191,7 +321,6 @@ public class SolicitudController implements Initializable {
 			cs.registerOutParameter(18, Types.INTEGER);
 			cs.registerOutParameter(19, Types.VARCHAR);
 			cs.execute();
-			System.out.println(cs.getInt(14) + "-" + cs.getString(15));
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
