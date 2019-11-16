@@ -139,7 +139,7 @@ public class SolicitudController implements Initializable {
     	
     	createSolicitud(codigo, estado, descripcion, clienteCedula, codigoProducto, fechaCreacion, tipo, nombre, fechaNacimiento, direccion, telefono, descripcionProducto, tipoProducto, errorCodCliente, errorNameCliente, errorCodProducto, errorNameProducto, errorCodSolicitud, errorNameSolicitud);
     	
-    	if (errorCodCliente == 0 || errorCodProducto == 0 || errorCodSolicitud == 0) {
+    	if (errorCodCliente == 0 && errorCodProducto == 0 && errorCodSolicitud == 0) {
     		JOptionPane.showMessageDialog(null, "se ha registrado con exito");
     	} else if (errorCodCliente != 0) {
     		JOptionPane.showMessageDialog(null,  errorNameCliente);
