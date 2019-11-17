@@ -18,12 +18,12 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 1;
-            errorName := 'anomalia';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pCreatesolicitudmodificacion;
-    
+
     --function para leer solicitud modificacion por solicitud codigo
     function fReadsolicitudmodificacionsolicitudcodigo(Esolicitudcodigo in solicitudmodificacion.solicitudcodigo%type, errorCod out number, errorName out varchar2) return solicitudmodificacion%rowtype is
     rc solicitudmodificacion%rowtype;
@@ -37,12 +37,12 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end fReadsolicitudmodificacionsolicitudcodigo;
-    
+
     --function para leer solicitud modificacion por producto codigo
     function fReadsolicitudmodificacionprodutocodigo(Eproductocodigo in solicitudmodificacion.productocodigo%type, errorCod out number, errorName out varchar2) return solicitudmodificacion%rowtype is
     rc solicitudmodificacion%rowtype;
@@ -56,12 +56,12 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end fReadsolicitudmodificacionprodutocodigo;
-    
+
     --procedure para actualizar solicitudmodificacion por solicitud codigo
     procedure pUpdatesolicitudmodificacionsolicitudcodigo(Esolicitudcodigo in solicitudmodificacion.solicitudcodigo%type, Eproductocodigo in solicitudmodificacion.productocodigo%type, errorCod out number, errorName out varchar2) is
     begin
@@ -73,12 +73,12 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdatesolicitudmodificacionsolicitudcodigo;
-    
+
     --procedure para actualizar solicitudmodificacion por producto codigo
     procedure pUpdatesolicitudmodificacionproductocodigo(Esolicitudcodigo in solicitudmodificacion.solicitudcodigo%type, Eproductocodigo in solicitudmodificacion.productocodigo%type, errorCod out number, errorName out varchar2) is
     begin
@@ -90,13 +90,13 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdatesolicitudmodificacionproductocodigo;
-    
-    --procedure para borrar asignacion por solicitud codigo
+
+    --procedure para borrar solicitud modificacion por solicitud codigo
     procedure pDeletesolicitudmodificacionsolicitudcodigo(Esolicitudcodigo in solicitudmodificacion.solicitudcodigo%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -106,13 +106,13 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pDeletesolicitudmodificacionsolicitudcodigo;
-    
-    --procedure para borrar asignacion por producto codigo
+
+    --procedure para borrar solicitud modificacion por producto codigo
     procedure pDeletesolicitudmodificacionproductocodigo(Eproductocodigo in solicitudmodificacion.productocodigo%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -122,10 +122,10 @@ create or replace package body pksolicitudmodificacion is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'solicitud modificacion';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pDeletesolicitudmodificacionproductocodigo;
-    
+
 end pksolicitudmodificacion;

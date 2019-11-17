@@ -15,12 +15,12 @@ create or replace package body pkproducto is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 1;
-            errorName := 'anomalia';
+            errorName := 'producto';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pCreateproducto;
-    
+
     --function para leer producto
     function fReadProducto(Ecodigo in producto.codigo%type, errorCod out number, errorName out varchar2) return producto%rowtype is
     rc producto%rowtype;
@@ -34,7 +34,7 @@ create or replace package body pkproducto is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'producto';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
@@ -51,13 +51,13 @@ create or replace package body pkproducto is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'producto';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdateproducto;
-    
-    --procedure para borrar asignacion
+
+    --procedure para borrar producto
     procedure pDeleteproducto(Ecodigo in producto.codigo%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -67,7 +67,7 @@ create or replace package body pkproducto is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'producto';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';

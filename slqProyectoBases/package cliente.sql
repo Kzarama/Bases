@@ -15,7 +15,7 @@ create or replace package body pkCliente is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 1;
-            errorName := 'anomalia';
+            errorName := 'cliente';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
@@ -34,12 +34,12 @@ create or replace package body pkCliente is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'cliente';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end fReadCliente;
-    
+
     --procedure para actualizar cliente
     procedure pUpdateCliente(Ecedula in cliente.cedula%type, Enombre in cliente.nombre%type, Efechanacimiento in cliente.fechanacimiento%type, Edireccion in cliente.direccion%type, Etelefono in cliente.telefono%type, errorCod out number, errorName out varchar2) is
     begin
@@ -51,12 +51,12 @@ create or replace package body pkCliente is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'cliente';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdateCliente;
-    
+
     --procedure para borrar asignacion
     procedure pDeleteCliente(ECedula in cliente.cedula%type, errorCod out number, errorName out varchar2) is
     begin
@@ -67,7 +67,7 @@ create or replace package body pkCliente is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'cliente';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';

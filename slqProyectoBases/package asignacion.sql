@@ -23,7 +23,7 @@ create or replace package body pkAsignacion is
             errorCod := 9;
             errorname := 'desconocido';
     end pCreateAsignacion;
-    
+
     --function para leer asignacion por funcionario cedulas
     function fReadAsignacionfuncionariocedula(EFuncionarioCedula in asignacion.FuncionarioCedula%type, errorCod out number, errorName out varchar2) return asignacion%rowtype is
     rc asignacion%rowtype;
@@ -42,7 +42,7 @@ create or replace package body pkAsignacion is
             errorCod := 9;
             errorname := 'desconocido';
     end fReadAsignacionfuncionariocedula;
-    
+
     --function para leer asignacion por codigo de solicitud
     function fReadAsignacionsolicitudCodigo(EsolicitudCodigo in asignacion.solicitudcodigo%type, errorCod out number, errorName out varchar2) return asignacion%rowtype is
     rc asignacion%rowtype;
@@ -61,7 +61,7 @@ create or replace package body pkAsignacion is
             errorCod := 9;
             errorname := 'desconocido';
     end fReadAsignacionsolicitudCodigo;
-    
+
     --procedure para actualizar asignacion por cedula funcionario
     procedure pUpdateAsignacionfuncionariocedula(EfechaAsignacion in asignacion.fechaAsignacion%type, EfechaAtencion in asignacion.fechaAtencion%type, EfuncionarioCedula in asignacion.funcionarioCedula%type, EsolicitudCodigo in asignacion.solicitudCodigo%type, EfuncionarioComentario in asignacion.funcionarioComentario%type, Eatendido in asignacion.atendido%type, errorCod out number, errorName out varchar2) is
     begin
@@ -111,7 +111,7 @@ create or replace package body pkAsignacion is
             errorCod := 9;
             errorname := 'desconocido';
     end pDeleteAsignacionfuncionariocedula;
-    
+
     --procedure para borrar asignacion por solicitud codigo
     procedure pDeleteAsignacionsolicitudCodigo(EsolicitudCodigo in asignacion.solicitudCodigo%type, errorCod out number, errorName out varchar2) is
     begin
@@ -127,5 +127,5 @@ create or replace package body pkAsignacion is
             errorCod := 9;
             errorname := 'desconocido';
     end pDeleteAsignacionsolicitudCodigo;    
-    
+
 end pkAsignacion;

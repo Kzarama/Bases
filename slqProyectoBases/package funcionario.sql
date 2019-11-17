@@ -15,12 +15,12 @@ create or replace package body pkfuncionario is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 1;
-            errorName := 'anomalia';
+            errorName := 'funcionario';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pCreatefuncionario;
-    
+
     --function para leer funcionario
     function fReadfuncionario(Ecedula in funcionario.cedula%type, errorCod out number, errorName out varchar2) return funcionario%rowtype is
     rc funcionario%rowtype;
@@ -34,12 +34,12 @@ create or replace package body pkfuncionario is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'funcionario';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end fReadfuncionario;
-    
+
     --procedure para actualizar funcionario
     procedure pUpdatefuncionario(Ecedula in funcionario.cedula%type, Enombre in funcionario.nombre%type, Efechanacimiento in funcionario.fechanacimiento%type, Edireccion in funcionario.direccion%type, Etelefono in funcionario.telefono%type, errorCod out number, errorName out varchar2) is
     begin
@@ -51,12 +51,12 @@ create or replace package body pkfuncionario is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'funcionario';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdatefuncionario;
-    
+
     --procedure para borrar asignacion
     procedure pDeletefuncionario(ECedula in funcionario.cedula%type, errorCod out number, errorName out varchar2) is
     begin
@@ -67,7 +67,7 @@ create or replace package body pkfuncionario is
         EXCEPTION
             when dup_val_on_index then
             errorCod := 2;
-            errorName := 'asignacion';
+            errorName := 'funcionario';
             when OTHERS then
             errorCod := 9;
             errorname := 'desconocido';
