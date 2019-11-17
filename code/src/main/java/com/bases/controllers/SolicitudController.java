@@ -103,7 +103,7 @@ public class SolicitudController implements Initializable {
     	cargarDriver();
     	
     	//solicitud
-    	String codigo = "" + ((int)(Math.random()*10 + 100));
+    	String codigo = "" + ((int)(Math.random() * 100 + 100));
     	String estado = choiceEstadoSol.getValue();
     	if (estado.equals("Otro")) {
     		estado = fieldEstadoSol.getText();
@@ -163,7 +163,8 @@ public class SolicitudController implements Initializable {
     	if (error.equals("")) {
     		JOptionPane.showMessageDialog(null, "se ha registrado con exito");
     	} else {
-    		JOptionPane.showMessageDialog(null,  "Ha ocurrido un error con " + error.substring(1) + "\n Numero de error: " +error.charAt(0));
+    		String typeError = error.charAt(0) == '1' ? " valor duplicado" : error.charAt(0) == '2' ? " datos no encontrados" : " desconocido";
+    		JOptionPane.showMessageDialog(null,  "Ha ocurrido un error con " + error.substring(1) + "\nNumero de error: " + error.charAt(0) + typeError);
     	}
     }
 
@@ -342,7 +343,11 @@ public class SolicitudController implements Initializable {
 		} else if (errorCodProducto != 0) {
 			return errorCodProducto + errorNameProducto;
 		} else if (errorCodSolicitud != 0) {
-			return errorCodSolicitud + errorNameSolicitud;
+			if (errorCodSolicitud == 9) {
+				return errorCodSolicitud + "no se ha encontrado al usuario o el producto";
+			} else {
+				return errorCodSolicitud + errorNameSolicitud;
+			}
 		} else {
 			return "";
 		}
