@@ -188,7 +188,7 @@ public class SolicitudController implements Initializable {
 //			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			
-			cs = con.prepareCall("{ ? = call pkCrearSolicitudN2.pRetornarEstadoSol }");
+			cs = con.prepareCall("{ ? = call pkCrearSolicitudN3.pRetornarEstadoSol }");
 			cs.registerOutParameter(1, OracleTypes.CURSOR);
 			cs.execute();
 			ResultSet rs = (ResultSet) cs.getObject(1);
@@ -226,7 +226,7 @@ public class SolicitudController implements Initializable {
 //			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			
-			cs = con.prepareCall("{ ? = call pkCrearSolicitudN2.pRetornarTipoSol }");
+			cs = con.prepareCall("{ ? = call pkCrearSolicitudN3.pRetornarTipoSol }");
 			cs.registerOutParameter(1, OracleTypes.CURSOR);
 			cs.execute();
 			ResultSet rs = (ResultSet) cs.getObject(1);
@@ -264,7 +264,7 @@ public class SolicitudController implements Initializable {
 //			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			
-			cs = con.prepareCall("{ ? = call pkCrearSolicitudN2.pRetornarTipoProducto }");
+			cs = con.prepareCall("{ ? = call pkCrearSolicitudN3.pRetornarTipoProducto }");
 			cs.registerOutParameter(1, OracleTypes.CURSOR);
 			cs.execute();
 			ResultSet rs = (ResultSet) cs.getObject(1);
