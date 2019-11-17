@@ -158,19 +158,12 @@ public class SolicitudController implements Initializable {
     	int errorCodSolicitud = 0;
     	String errorNameSolicitud = "";
     	
-    	createSolicitud(codigo, estado, descripcion, clienteCedula, codigoProducto, fechaCreacion, tipo, nombre, fechaNacimiento, direccion, telefono, descripcionProducto, tipoProducto, errorCodCliente, errorNameCliente, errorCodProducto, errorNameProducto, errorCodSolicitud, errorNameSolicitud);
+    	String error = createSolicitud(codigo, estado, descripcion, clienteCedula, codigoProducto, fechaCreacion, tipo, nombre, fechaNacimiento, direccion, telefono, descripcionProducto, tipoProducto, errorCodCliente, errorNameCliente, errorCodProducto, errorNameProducto, errorCodSolicitud, errorNameSolicitud);
     	
-    	if (errorCodCliente == 0 && errorCodProducto == 0 && errorCodSolicitud == 0) {
+    	if (error.equals("")) {
     		JOptionPane.showMessageDialog(null, "se ha registrado con exito");
-    	} else if (errorCodCliente != 0) {
-    		JOptionPane.showMessageDialog(null,  errorNameCliente);
-    		System.out.println("1"+errorCodCliente);
-    	} else if (errorCodProducto != 0) {
-    		JOptionPane.showMessageDialog(null, errorNameProducto);
-    		System.out.println("2"+errorCodProducto);
-    	} else if (errorCodSolicitud != 0) {
-    		JOptionPane.showMessageDialog(null, errorNameSolicitud);
-    		System.out.println("3"+errorCodSolicitud);
+    	} else {
+    		JOptionPane.showMessageDialog(null,  "Ha ocurrido un error con " + error.substring(1) + "\n Numero de error: " +error.charAt(0));
     	}
     }
 
@@ -294,7 +287,9 @@ public class SolicitudController implements Initializable {
 		return tipoPro;
 	}
 	
-	public void createSolicitud(String codigo, String estado, String descripcion, String clienteCedula, String codigoProducto, String fechaCreacion, String tipo, String nombre, String fechaNacimiento, String direccion, String telefono, String descripcionProducto, String tipoProducto, int errorCodCliente, String errorNameCliente, int errorCodProducto, String errorNameProducto, int errorCodSolicitud, String errorNameSolicitud) {
+	public String createSolicitud(String codigo, String estado, String descripcion, String clienteCedula, String codigoProducto, String fechaCreacion, String tipo,
+			String nombre, String fechaNacimiento, String direccion, String telefono, String descripcionProducto, String tipoProducto, 
+			int errorCodCliente, String errorNameCliente, int errorCodProducto, String errorNameProducto, int errorCodSolicitud, String errorNameSolicitud) {
 		Connection con = null;
 		CallableStatement cs = null;
 		try {
@@ -321,6 +316,12 @@ public class SolicitudController implements Initializable {
 			cs.registerOutParameter(18, Types.INTEGER);
 			cs.registerOutParameter(19, Types.VARCHAR);
 			cs.execute();
+			errorCodCliente = cs.getInt(14);
+			errorNameCliente = cs.getString(15);
+			errorCodProducto = cs.getInt(16);
+			errorNameProducto = cs.getString(17);
+			errorCodSolicitud = cs.getInt(18);
+			errorNameSolicitud = cs.getString(19);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -335,6 +336,15 @@ public class SolicitudController implements Initializable {
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
+		}
+		if (errorCodCliente != 0) {
+			return errorCodCliente + errorNameCliente;
+		} else if (errorCodProducto != 0) {
+			return errorCodProducto + errorNameProducto;
+		} else if (errorCodSolicitud != 0) {
+			return errorCodSolicitud + errorNameSolicitud;
+		} else {
+			return "";
 		}
 	}
 	
