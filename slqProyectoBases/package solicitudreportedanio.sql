@@ -1,3 +1,6 @@
+/*
+package CRUD de solicitud reporte danio
+*/
 create or replace package pksolicitudreportedanio is
     procedure pCreatesolicitudreportedanio(solicitudcodigo in solicitudreportedanio.solicitudcodigo%type, anomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2);
     function fReadsolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, errorCod out number, errorName out varchar2) return solicitudreportedanio%rowtype;
@@ -7,9 +10,13 @@ create or replace package pksolicitudreportedanio is
     procedure pDeletesolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, errorCod out number, errorName out varchar2);
     procedure pDeletesolicitudreportedanioanomaliaid(Eanomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2);
 end pksolicitudreportedanio;
-
+/*
+package body CRUD de solicitud reporte danio
+*/
 create or replace package body pksolicitudreportedanio is
-    --procedure para añadir solicitudreportedanio
+    /*
+	procedure para añadir solicitudreportedanio
+	*/
     procedure pCreatesolicitudreportedanio(solicitudcodigo in solicitudreportedanio.solicitudcodigo%type, anomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -23,8 +30,9 @@ create or replace package body pksolicitudreportedanio is
             errorCod := 9;
             errorname := 'desconocido';
     end pCreatesolicitudreportedanio;
-
-    --function para leer solicitud reporte danio por solicitud codigo
+	/*
+    function para leer solicitud reporte danio por solicitud codigo
+	*/
     function fReadsolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, errorCod out number, errorName out varchar2) return solicitudreportedanio%rowtype is
     rc solicitudreportedanio%rowtype;
     begin
@@ -42,8 +50,9 @@ create or replace package body pksolicitudreportedanio is
             errorCod := 9;
             errorname := 'desconocido';
     end fReadsolicitudreportedaniosolicitudcodigo;
-
-    --function para leer solicitud reporte danio anomalia id
+	/*
+    function para leer solicitud reporte danio anomalia id
+	*/
     function fReadsolicitudreportedanioanomaliaid(Eanomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2) return solicitudreportedanio%rowtype is
     rc solicitudreportedanio%rowtype;
     begin
@@ -61,8 +70,9 @@ create or replace package body pksolicitudreportedanio is
             errorCod := 9;
             errorname := 'desconocido';
     end fReadsolicitudreportedanioanomaliaid;
-
-    --procedure para actualizar solicitudreportedanio por solicitud codigo
+	/*
+    procedure para actualizar solicitudreportedanio por solicitud codigo
+	*/
     procedure pUpdatesolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, Eanomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -78,8 +88,9 @@ create or replace package body pksolicitudreportedanio is
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdatesolicitudreportedaniosolicitudcodigo;
-
-    --procedure para actualizar solicitudreportedanio por anomalia id
+	/*
+    procedure para actualizar solicitudreportedanio por anomalia id
+	*/
     procedure pUpdatesolicitudreportedanioanomaliaid(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, Eanomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -95,9 +106,10 @@ create or replace package body pksolicitudreportedanio is
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdatesolicitudreportedanioanomaliaid;
-
-    --procedure para borrar solicitud reporte danio por solicitud codigo
-    procedure pDeletesolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, errorCod out number, errorName out varchar2) is
+	/*
+    procedure para borrar solicitud reporte danio por solicitud codigo
+    */
+	procedure pDeletesolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
         errorName := '';
@@ -111,8 +123,9 @@ create or replace package body pksolicitudreportedanio is
             errorCod := 9;
             errorname := 'desconocido';
     end pDeletesolicitudreportedaniosolicitudcodigo;
-
-    --procedure para borrar solicitud reporte danio por anomalia id
+	/*
+    procedure para borrar solicitud reporte danio por anomalia id
+	*/
     procedure pDeletesolicitudreportedanioanomaliaid(Eanomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;

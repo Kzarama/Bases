@@ -1,3 +1,6 @@
+/*
+eliminar registros de las tablas
+*/
 drop table anomalia cascade constraints;
 drop table asignacion cascade constraints;
 drop table cliente cascade constraints;
@@ -7,7 +10,9 @@ drop table servicio cascade constraints;
 drop table solicitud cascade constraints;
 drop table solicitudmodificacion cascade constraints;
 drop table solicitudreportedanio cascade constraints;
-
+/*
+crear tablas, claves primarias y foraneas
+*/
 CREATE TABLE anomalia (
     id            VARCHAR2(20 CHAR) NOT NULL,
     descripcion   VARCHAR2(20 CHAR)

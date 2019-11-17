@@ -1,12 +1,19 @@
+/*
+package CRUD de cliente
+*/
 create or replace package pkCliente is
     procedure pCrearCliente(cedula in cliente.cedula%type, nombre in cliente.nombre%type, fechanacimiento in cliente.fechanacimiento%type, direccion in cliente.direccion%type, telefono in cliente.telefono%type, errorCod out number, errorName out varchar2);
     function fReadCliente(Ecedula in cliente.cedula%type, errorCod out number, errorName out varchar2) return cliente%rowtype;
     procedure pUpdateCliente(Ecedula in cliente.cedula%type, Enombre in cliente.nombre%type, Efechanacimiento in cliente.fechanacimiento%type, Edireccion in cliente.direccion%type, Etelefono in cliente.telefono%type, errorCod out number, errorName out varchar2);
     procedure pDeleteCliente(Ecedula in cliente.cedula%type, errorCod out number, errorName out varchar2);
 end pkCliente;
-
+/*
+package body CRUD de cliente
+*/
 create or replace package body pkCliente is
-    --procedure para añadir cliente
+    /*
+	procedure para añadir cliente
+	*/
     procedure pCrearCliente(cedula in cliente.cedula%type, nombre in cliente.nombre%type, fechanacimiento in cliente.fechanacimiento%type, direccion in cliente.direccion%type, telefono in cliente.telefono%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -20,8 +27,9 @@ create or replace package body pkCliente is
             errorCod := 9;
             errorname := 'desconocido';
     end pCrearCliente;
-
-    --function para leer cliente
+	/*
+	function para leer cliente
+	*/
     function fReadCliente(Ecedula in cliente.cedula%type, errorCod out number, errorName out varchar2) return cliente%rowtype is
     rc cliente%rowtype;
     begin
@@ -39,8 +47,9 @@ create or replace package body pkCliente is
             errorCod := 9;
             errorname := 'desconocido';
     end fReadCliente;
-
-    --procedure para actualizar cliente
+	/*
+	procedure para actualizar cliente
+	*/
     procedure pUpdateCliente(Ecedula in cliente.cedula%type, Enombre in cliente.nombre%type, Efechanacimiento in cliente.fechanacimiento%type, Edireccion in cliente.direccion%type, Etelefono in cliente.telefono%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -56,8 +65,9 @@ create or replace package body pkCliente is
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdateCliente;
-
-    --procedure para borrar asignacion
+	/*
+	procedure para borrar cliente
+	*/
     procedure pDeleteCliente(ECedula in cliente.cedula%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;

@@ -1,12 +1,19 @@
+/*
+package CRUD de anomalia
+*/
 create or replace package pkAnomalia is
     procedure pCreateAnomalia(id in anomalia.id%type, descripcion in anomalia.descripcion%type, errorCod out number, errorName out varchar2);
     function fReadAnomalia(Eid in anomalia.id%type, errorCod out number, errorName out varchar2) return anomalia%rowtype;
     procedure pUpdateAnomalia(Eid in anomalia.id%type, Edescripcion in anomalia.descripcion%type, errorCod out number, errorName out varchar2);
     procedure pDeleteAnomalia(Eid in anomalia.id%type, errorCod out number, errorName out varchar2);
 end pkAnomalia;
-
+/*
+package body CRUD de anomalia
+*/
 create or replace package body pkAnomalia is
-    --procedure para añadir anomalia
+    /*
+	procedure para añadir anomalia
+	*/
     procedure pCreateAnomalia(id in anomalia.id%type, descripcion in anomalia.descripcion%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -20,8 +27,9 @@ create or replace package body pkAnomalia is
             errorCod := 9;
             errorname := 'desconocido';
     end pCreateAnomalia;
-
-    --function para leer anomalia
+	/*
+    function para leer anomalia
+	*/
     function fReadAnomalia(Eid in anomalia.id%type, errorCod out number, errorName out varchar2) return anomalia%rowtype is
     rc anomalia%rowtype;
     begin
@@ -39,8 +47,9 @@ create or replace package body pkAnomalia is
             errorCod := 9;
             errorname := 'desconocido';
     end fReadAnomalia;
-
-    --procedure para actualizar anomalia
+	/*
+    procedure para actualizar anomalia
+	*/
     procedure pUpdateAnomalia(Eid in anomalia.id%type, Edescripcion in anomalia.descripcion%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
@@ -56,8 +65,9 @@ create or replace package body pkAnomalia is
             errorCod := 9;
             errorname := 'desconocido';
     end pUpdateAnomalia;
-
-    --procedure para borrar anomalia
+	/*
+	procedure para borrar anomalia
+	*/
     procedure pDeleteAnomalia(Eid in anomalia.id%type, errorCod out number, errorName out varchar2) is
     begin
         errorCod := 0;
