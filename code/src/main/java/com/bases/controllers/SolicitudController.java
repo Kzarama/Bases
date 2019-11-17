@@ -28,33 +28,41 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import oracle.jdbc.OracleTypes;
-
+/**
+ * interfaz del proyecto de bases de datos
+ * inicia la interfaz del proyecto
+ */
 public class SolicitudController implements Initializable {
-
-    @FXML
+	/**
+	 * atributos de la clase
+	 * atributos ventana
+	 */
+	@FXML
     private AnchorPane root;
-
+	/**
+	 * atributos de la clase
+	 * atributos de la ventana
+	 */
     @FXML
     private TabPane tabPane;
-
-    @FXML
+	/**
+	 * tab de la seccion de solicitud
+	 */
+	@FXML
     private Tab tabSolicitud;
-
-    @FXML
-    private ChoiceBox<String> choiceEstadoSol;
-
-    @FXML
-    private ChoiceBox<String> choiceTipoSol;
-
-    @FXML
-    private TextArea textAreaDescripcionSol;
-
-    @FXML
+	/**
+	 * tab de la seccion de cliente
+	 */
+	@FXML
     private Tab tabCliente;
-
-    @FXML
-    private CheckBox checkCliente;
-
+	/**
+	 * tab de la seccion de producto
+	 */
+	@FXML
+    private Tab tabProducto;
+	/**
+	 * campos de texto para los atributos a añadir a la bd
+	 */
     @FXML
     private TextField fieldNombreCliente;
 
@@ -66,16 +74,7 @@ public class SolicitudController implements Initializable {
 
     @FXML
     private TextField fieldTelefonoCliente;
-
-    @FXML
-    private DatePicker fieldFechaNacimientoCliente;
-
-    @FXML
-    private Tab tabProducto;
-
-    @FXML
-    private CheckBox checkProducto;
-
+    
     @FXML
     private TextField fieldCodigoProducto;
     
@@ -87,22 +86,57 @@ public class SolicitudController implements Initializable {
     
     @FXML
     private TextField fieldNuevoTipoPro;
+    /**
+     * checkbox para marcar si la tabla de cliente o producto ya esta creado
+     */
+    @FXML
+    private CheckBox checkCliente;
+	
+    @FXML
+    private CheckBox checkProducto;
+    /**
+     * choicebox para elegir estado y tipo de solicitud y tipo de producto
+     */
+    @FXML
+    private ChoiceBox<String> choiceEstadoSol;
+
+    @FXML
+    private ChoiceBox<String> choiceTipoSol;
+    
+    @FXML
+    private ChoiceBox<String> choiceTipoProducto;
+    /**
+     * textarea para ingresar la descripcion de la solicitud y del producto
+     */
+    @FXML
+    private TextArea textAreaDescripcionSol;
     
     @FXML
     private TextArea textAreaDescripcionProducto;
-
+    /**
+     * datepicker para ingresar la fecha de nacimiento del cliente
+     */
+    @FXML
+    private DatePicker fieldFechaNacimientoCliente;
+    /**
+     * boton para agregar los cambios a la bd
+     */
     @FXML
     private Button btnAgregar;
-
-    @FXML
-    private ChoiceBox<String> choiceTipoProducto;
-
+    /**
+     * metodo para agregar una solicitud a la bd que toma los datos desde los campos de la interfaz
+     * @param event - evento del boton agregar
+     */
     @FXML
     void agregarSolicitud(ActionEvent event) {
-    	
+    	/**
+    	 * carga el driver de la libreria de la bd
+    	 */
     	cargarDriver();
-    	
-    	//solicitud
+    	/**
+    	 * metodos para tomar datos
+    	 * solicitud
+    	 */
     	String codigo = "" + ((int)(Math.random() * 100 + 100));
     	String estado = choiceEstadoSol.getValue();
     	if (estado.equals("Otro")) {
@@ -116,8 +150,10 @@ public class SolicitudController implements Initializable {
     	LocalDate localdate = LocalDate.now();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
     	String fechaCreacion = localdate.format(formatter);
-    	
-    	//cliente
+    	/**
+    	 * metodos para tomar datos
+    	 * cliente
+    	 */
     	String clienteCedula = fieldCedulaCliente.getText();
     	String nombre;
     	String direccion;
@@ -135,8 +171,10 @@ public class SolicitudController implements Initializable {
 	    	telefono = "0";
 	    	fechaNacimiento = "01/01/2000";
     	}
-    	
-    	//producto
+    	/**
+    	 * metodos para tomar datos
+    	 * producto
+    	 */
     	String codigoProducto = fieldCodigoProducto.getText();;
     	String descripcionProducto;
     	String tipoProducto;
@@ -150,16 +188,13 @@ public class SolicitudController implements Initializable {
 	    	descripcionProducto = "0";
 	    	tipoProducto = "0";
     	}
-    	
-    	int errorCodCliente = 0;
-    	String errorNameCliente = "";
-    	int errorCodProducto = 0;
-    	String errorNameProducto = "";
-    	int errorCodSolicitud = 0;
-    	String errorNameSolicitud = "";
-    	
-    	String error = createSolicitud(codigo, estado, descripcion, clienteCedula, codigoProducto, fechaCreacion, tipo, nombre, fechaNacimiento, direccion, telefono, descripcionProducto, tipoProducto, errorCodCliente, errorNameCliente, errorCodProducto, errorNameProducto, errorCodSolicitud, errorNameSolicitud);
-    	
+    	/**
+    	 * llamado al metodo de crear solicitud
+    	 */
+    	String error = createSolicitud(codigo, estado, descripcion, clienteCedula, codigoProducto, fechaCreacion, tipo, nombre, fechaNacimiento, direccion, telefono, descripcionProducto, tipoProducto);
+    	/**
+    	 * si existe un error lo muestra en pantalla
+    	 */
     	if (error.equals("")) {
     		JOptionPane.showMessageDialog(null, "se ha registrado con exito");
     	} else {
@@ -167,13 +202,18 @@ public class SolicitudController implements Initializable {
     		JOptionPane.showMessageDialog(null,  "Ha ocurrido un error con " + error.substring(1) + "\nNumero de error: " + error.charAt(0) + typeError);
     	}
     }
-
+    /**
+     * ingresa los datos en los choisebox
+     */
 	public void initialize(URL location, ResourceBundle resources) {
 		choiceEstadoSol.setItems(FXCollections.observableArrayList(obtenerDatosEstadoSol()));
 		choiceTipoProducto.setItems(FXCollections.observableArrayList(obtenerDatosTipoSol()));
 		choiceTipoSol.setItems(FXCollections.observableArrayList(obtenerDatosTipoProducto()));	
 	}
-	
+	/**
+	 * toma los estados de solicitud desde la bd
+	 * @return String[] con los estados de solicitud
+	 */
 	private String[] obtenerDatosEstadoSol() {
 		Connection con = null;
 		CallableStatement cs = null;
@@ -211,7 +251,10 @@ public class SolicitudController implements Initializable {
 		estadoSol[data.size()] = "Otro";
 		return estadoSol;
 	}
-	
+	/**
+	 * toma los tipos de solicitud desde la bd
+	 * @return String[] con los tipos de solicitud
+	 */
 	private String[] obtenerDatosTipoSol() {
 		Connection con = null;
 		CallableStatement cs = null;
@@ -249,7 +292,10 @@ public class SolicitudController implements Initializable {
 		tipoSol[data.size()] = "Otro";
 		return tipoSol;
 	}
-	
+	/**
+	 * toma los tipos de producto desde la bd
+	 * @return String[] con los tipos de producto
+	 */
 	private String[] obtenerDatosTipoProducto() {
 		Connection con = null;
 		CallableStatement cs = null;
@@ -287,12 +333,32 @@ public class SolicitudController implements Initializable {
 		tipoPro[data.size()] = "Otro";
 		return tipoPro;
 	}
-	
-	public String createSolicitud(String codigo, String estado, String descripcion, String clienteCedula, String codigoProducto, String fechaCreacion, String tipo,
-			String nombre, String fechaNacimiento, String direccion, String telefono, String descripcionProducto, String tipoProducto, 
-			int errorCodCliente, String errorNameCliente, int errorCodProducto, String errorNameProducto, int errorCodSolicitud, String errorNameSolicitud) {
+	/**
+	 * metodo que envia la solicitud, el cliente y el producto a la bd para que sean añadidos
+	 * @param codigo - codigo de solicitud
+	 * @param estado - estado de solicitud
+	 * @param descripcion - descripcion de solicitud
+	 * @param clienteCedula - cedula del cliente
+	 * @param codigoProducto - codigo del producto
+	 * @param fechaCreacion- fecha de creacion de la solicitud
+	 * @param tipo - tipo de solicitud
+	 * @param nombre - nombre del cliente
+	 * @param fechaNacimiento - fecha de nacimiento de cliente
+	 * @param direccion - direccion del cliente
+	 * @param telefono - numero de telefono del cliente
+	 * @param descripcionProducto - descripcion del producto
+	 * @param tipoProducto - tipo de producto
+	 * @return error - retorna el error de la bd
+	 */
+	public String createSolicitud(String codigo, String estado, String descripcion, String clienteCedula, String codigoProducto, String fechaCreacion, String tipo, String nombre, String fechaNacimiento, String direccion, String telefono, String descripcionProducto, String tipoProducto) {
 		Connection con = null;
 		CallableStatement cs = null;
+		int errorCodCliente = 0;
+		String errorNameCliente = "";
+		int errorCodProducto = 0;
+		String errorNameProducto = "";
+		int errorCodSolicitud = 0;
+		String errorNameSolicitud = "";
 		try {
 //			con = DriverManager.getConnection("jdbc:Oracle:thin:@//172.16.0.103:1522/ESTUD", "P09551_1_25", "P09551_1_25");
 			con = DriverManager.getConnection("jdbc:Oracle:thin:@//200.3.193.24:1522/ESTUD", "P09551_1_25", "P09551_1_25");
@@ -352,7 +418,9 @@ public class SolicitudController implements Initializable {
 			return "";
 		}
 	}
-	
+	/**
+	 * metodo que carga el driver de oracle
+	 */
 	private void cargarDriver() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
