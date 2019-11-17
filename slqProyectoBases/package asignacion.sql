@@ -10,6 +10,7 @@ create or replace package pkAsignacion is
     procedure pDeleteAsignacionfuncionariocedula(EfuncionarioCedula in asignacion.funcionarioCedula%type, errorCod out number, errorName out varchar2);
     procedure pDeleteAsignacionsolicitudCodigo(EsolicitudCodigo in asignacion.solicitudCodigo%type, errorCod out number, errorName out varchar2);
 end pkAsignacion;
+/
 /*
 package body CRUD de asignacion
 */
@@ -142,3 +143,4 @@ create or replace package body pkAsignacion is
     end pDeleteAsignacionsolicitudCodigo;    
 
 end pkAsignacion;
+/

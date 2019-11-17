@@ -7,6 +7,7 @@ create or replace package pkCrearSolicitudN2 is
     function pRetornarTipoSol return SYS_REFCURSOR;
     function pRetornarTipoProducto return SYS_REFCURSOR;
 end pkCrearSolicitudN2;
+/
 /*
 package body de nivel 2 con las funciones para crear solicitud retornar estado solicitud, retornar tipo solicitud y retornar tipo producto
 */
@@ -60,3 +61,4 @@ create or replace package body pkCrearSolicitudN2 is
     end;
 
 end pkCrearSolicitudN2;
+/

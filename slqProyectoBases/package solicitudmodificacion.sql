@@ -10,6 +10,7 @@ create or replace package pksolicitudmodificacion is
     procedure pDeletesolicitudmodificacionsolicitudcodigo(Esolicitudcodigo in solicitudmodificacion.solicitudcodigo%type, errorCod out number, errorName out varchar2);
     procedure pDeletesolicitudmodificacionproductocodigo(Eproductocodigo in solicitudmodificacion.productocodigo%type, errorCod out number, errorName out varchar2);
 end pksolicitudmodificacion;
+/
 /*
 package body CRUD de solicitud modificacion
 */
@@ -142,3 +143,4 @@ create or replace package body pksolicitudmodificacion is
     end pDeletesolicitudmodificacionproductocodigo;
 
 end pksolicitudmodificacion;
+/

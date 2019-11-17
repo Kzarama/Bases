@@ -7,6 +7,7 @@ create or replace package pkCrearSolicitudN3 is
     function pRetornarTipoSol return sys_refcursor;
     function pRetornarTipoProducto return sys_refcursor;
 end pkCrearSolicitudN3;
+/
 /*
 package de nivel 3 con las funciones para crear solicitud retornar estado solicitud, retornar tipo solicitud y retornar tipo producto
 */
@@ -56,3 +57,4 @@ create or replace package body pkCrearSolicitudN3 is
     end;
 
 end pkCrearSolicitudN3;
+/

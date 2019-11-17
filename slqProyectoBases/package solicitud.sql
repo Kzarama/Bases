@@ -13,6 +13,7 @@ create or replace package pksolicitud is
     procedure pDeletesolicitudClientecedula(Eclientecedula in solicitud.clientecedula%type, errorCod out number, errorName out varchar2);
     procedure pDeletesolicitudproductocodigo(Eproductocodigo in solicitud.productocodigo%type, errorCod out number, errorName out varchar2);
 end pksolicitud;
+/
 /*
 package body CRUD de solicitud
 */
@@ -203,3 +204,4 @@ create or replace package body pksolicitud is
     end pDeletesolicitudproductocodigo;
 
 end pksolicitud;
+/

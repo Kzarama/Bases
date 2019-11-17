@@ -7,6 +7,7 @@ create or replace package pkfuncionario is
     procedure pUpdatefuncionario(Ecedula in funcionario.cedula%type, Enombre in funcionario.nombre%type, Efechanacimiento in funcionario.fechanacimiento%type, Edireccion in funcionario.direccion%type, Etelefono in funcionario.telefono%type, errorCod out number, errorName out varchar2);
     procedure pDeletefuncionario(Ecedula in funcionario.cedula%type, errorCod out number, errorName out varchar2);
 end pkfuncionario;
+/
 /*
 package body CRUD de funcionario
 */
@@ -84,3 +85,4 @@ create or replace package body pkfuncionario is
     end pDeletefuncionario;
 
 end pkfuncionario;
+/

@@ -10,6 +10,7 @@ create or replace package pksolicitudreportedanio is
     procedure pDeletesolicitudreportedaniosolicitudcodigo(Esolicitudcodigo in solicitudreportedanio.solicitudcodigo%type, errorCod out number, errorName out varchar2);
     procedure pDeletesolicitudreportedanioanomaliaid(Eanomaliaid in solicitudreportedanio.anomaliaid%type, errorCod out number, errorName out varchar2);
 end pksolicitudreportedanio;
+/
 /*
 package body CRUD de solicitud reporte danio
 */
@@ -142,3 +143,4 @@ create or replace package body pksolicitudreportedanio is
     end pDeletesolicitudreportedanioanomaliaid;
 
 end pksolicitudreportedanio;
+/

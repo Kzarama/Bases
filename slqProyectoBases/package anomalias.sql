@@ -7,6 +7,7 @@ create or replace package pkAnomalia is
     procedure pUpdateAnomalia(Eid in anomalia.id%type, Edescripcion in anomalia.descripcion%type, errorCod out number, errorName out varchar2);
     procedure pDeleteAnomalia(Eid in anomalia.id%type, errorCod out number, errorName out varchar2);
 end pkAnomalia;
+/
 /*
 package body CRUD de anomalia
 */
@@ -84,3 +85,4 @@ create or replace package body pkAnomalia is
     end pDeleteAnomalia;
 
 end pkAnomalia;
+/

@@ -10,6 +10,7 @@ create or replace package pkservicio is
     procedure pDeleteservicioproductocodigo(Eproductocodigo in servicio.productocodigo%type, errorCod out number, errorName out varchar2);
     procedure pDeleteservicioclientecedula(Eclientecedula in servicio.clientecedula%type, errorCod out number, errorName out varchar2);
 end pkservicio;
+/
 /*
 package body CRUD de servicio
 */
@@ -128,3 +129,4 @@ create or replace package body pkservicio is
     end pDeleteservicioclientecedula;
 
 end pkservicio;
+/

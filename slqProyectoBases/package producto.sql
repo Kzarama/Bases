@@ -7,6 +7,7 @@ create or replace package pkproducto is
     procedure pUpdateproducto(Ecodigo in producto.codigo%type, Edescripcion in producto.descripcion%type, Etipo in producto.tipo%type, errorCod out number, errorName out varchar2);
     procedure pDeleteproducto(Ecodigo in producto.codigo%type, errorCod out number, errorName out varchar2);
 end pkproducto;
+/
 /*
 package body CRUD de producto
 */
@@ -84,3 +85,4 @@ create or replace package body pkproducto is
     end pDeleteproducto;
 
 end pkproducto;
+/

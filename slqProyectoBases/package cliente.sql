@@ -7,6 +7,7 @@ create or replace package pkCliente is
     procedure pUpdateCliente(Ecedula in cliente.cedula%type, Enombre in cliente.nombre%type, Efechanacimiento in cliente.fechanacimiento%type, Edireccion in cliente.direccion%type, Etelefono in cliente.telefono%type, errorCod out number, errorName out varchar2);
     procedure pDeleteCliente(Ecedula in cliente.cedula%type, errorCod out number, errorName out varchar2);
 end pkCliente;
+/
 /*
 package body CRUD de cliente
 */
@@ -84,3 +85,4 @@ create or replace package body pkCliente is
     end pDeleteCliente;
 
 end pkCliente;
+/
