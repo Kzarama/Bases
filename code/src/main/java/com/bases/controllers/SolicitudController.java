@@ -145,7 +145,7 @@ public class SolicitudController implements Initializable {
     	String descripcion = textAreaDescripcionSol.getText();
     	String tipo = choiceTipoSol.getValue();
     	if (tipo.equals("Otro")) {
-    		tipo = fieldEstadoSol.getText();
+    		tipo = fieldNuevoTipoSol.getText();
     	}
     	LocalDate localdate = LocalDate.now();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
@@ -207,8 +207,8 @@ public class SolicitudController implements Initializable {
      */
 	public void initialize(URL location, ResourceBundle resources) {
 		choiceEstadoSol.setItems(FXCollections.observableArrayList(obtenerDatosEstadoSol()));
-		choiceTipoProducto.setItems(FXCollections.observableArrayList(obtenerDatosTipoSol()));
-		choiceTipoSol.setItems(FXCollections.observableArrayList(obtenerDatosTipoProducto()));	
+		choiceTipoProducto.setItems(FXCollections.observableArrayList(obtenerDatosTipoProducto()));
+		choiceTipoSol.setItems(FXCollections.observableArrayList(obtenerDatosTipoSol()));	
 	}
 	/**
 	 * toma los estados de solicitud desde la bd
